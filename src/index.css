@@ -3,6 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 h1,
 h2,
