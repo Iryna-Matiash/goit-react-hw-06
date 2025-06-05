@@ -1,8 +1,18 @@
-.container {
-  margin-top: 35px;
-  margin-left: 25px;
+.box {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  flex-direction:column;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight:400;
+  margin-bottom: 6px;
+}
+
+.input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #000;
+  border-radius: 4px;
   width: 300px;
 }

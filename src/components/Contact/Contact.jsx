@@ -1,28 +1,57 @@
-//import { number } from "yup";
-import { BsFillPersonFill, BsFillTelephoneFill } from "react-icons/bs";
-import css from "./Contact.module.css";
-import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsSlice";
 
-export default function Contact({ contact: { name, number, id } }) {
+// import React from 'react';
+// import styles from './Contact.module.css';
+
+// const Contact = ({ contact, onDelete }) => {
+//   return (
+//     <li className={styles.item}>
+//       <div className={styles.info}>
+//         <div className={styles.name}>
+//           <span>👤</span>
+//           <span>{contact.name}</span>
+//         </div>
+//         <div className={styles.number}>
+//           <span>📞</span>
+//           <span>{contact.number}</span>
+//         </div>
+//       </div>
+//        <button onClick={() => onDelete(contact.id)} className={styles.deleteButton}>
+//         Delete
+//       </button>
+//     </li>
+//   );
+// };
+
+// export default Contact;
+
+import React from 'react';
+import styles from './Contact.module.css';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
+
+const Contact = ({ contact }) => {
   const dispatch = useDispatch();
+
   return (
-    <div className={css.container}>
-      <ul className={css.list}>
-        <li className={css.name}>
-          <BsFillPersonFill />
-          {name}
-        </li>
-        <li className={css.tel}>
-          <BsFillTelephoneFill /> {number}
-        </li>
-      </ul>
-      <button
-        className={css.deleteBtn}
-        onClick={() => dispatch(deleteContact(id))}
-      >
+    <li className={styles.item}>
+      <div className={styles.info}>
+        <div className={styles.name}>
+          <span>👤</span>
+          <span>{contact.name}</span>
+        </div>
+        <div className={styles.number}>
+          <span>📞</span>
+          <span>{contact.number}</span>
+        </div>
+      </div>
+      <button onClick={() => dispatch(deleteContact(contact.id))} className={styles.deleteButton}>
         Delete
       </button>
-    </div>
+    </li>
   );
-}
+};
+
+export default Contact;
+
+
+

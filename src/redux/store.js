@@ -1,39 +1,23 @@
-import { configureStore } from "@reduxjs/toolkit";
-import contactsReducer from "./contactsSlice";
-import filtersReducer from "./filtersSlice";
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-const contactPersistConfig = {
-  key: "user_contact",
+import contactsReducer from './contactsSlice';
+import filtersReducer from './filtersSlice';
+
+const contactsPersistConfig = {
+  key: 'contacts',
   storage,
+  whitelist: ['items'],
 };
 
-const persistedContactReducer = persistReducer(
-  contactPersistConfig,
-  contactsReducer
-);
+const rootReducer = combineReducers({
+  contacts: persistReducer(contactsPersistConfig, contactsReducer),
+  filters: filtersReducer,
+});
 
 export const store = configureStore({
-  reducer: {
-    contacts: persistedContactReducer,
-    filters: filtersReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+  reducer: rootReducer,
 });
 
 export const persistor = persistStore(store);
